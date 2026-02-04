@@ -9,6 +9,10 @@ export interface Props {
 const { title, description = '', lang = 'en', canonicalUrl } = Astro.props;
 const currentPath = Astro.url.pathname;
 
+// Auto-generate canonical URL if not provided (self-referencing canonical)
+const siteUrl = 'https://jfmugen.com';
+const autoCanonicalUrl = canonicalUrl || `${siteUrl}${currentPath}`;
+
 // Navigation menus per language
 const navEN = [
   { label: 'Home', href: '/' },
@@ -84,7 +88,7 @@ else if (currentPath.startsWith('/pt/')) nav = navPT;
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   {description && <meta name="description" content={description} />}
-  {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+  <link rel="canonical" href={autoCanonicalUrl} />
   <link rel="icon" type="image/webp" href="/wp-content/uploads/2023/09/cropped-jump-force-icon-Mugen-32x32.webp" />
 </head>
 <body>
