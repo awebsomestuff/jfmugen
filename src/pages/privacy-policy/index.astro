@@ -1,0 +1,11 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+const title = 'Privacy Policy';
+const description = '';
+const content = `<h1>Privacy Policy</h1>
+`;
+---
+
+<MainLayout title={title} description={description} lang="en">
+<Fragment set:html={content} />
+</MainLayout>

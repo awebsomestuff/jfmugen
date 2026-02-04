@@ -1,0 +1,460 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+const title = 'Mugen Chars: The Ultimate Guide to Finding & Using Fighters';
+const description = 'Explore Mugen chars! Learn file structures, find downloads, install fighters, understand AI & creation in this complete M.U.G.E.N. guide.';
+const content = `<h1>Mugen Characters</h1>
+<p>Ever dreamed of pitting Street Fighter's Ryu against Dragon Ball's Goku? Or maybe throwing Homer Simpson into the mix against a custom-made superhero? In the wild world of PC gaming, the M.U.G.E.N engine makes these impossible crossovers a reality. M.U.G.E.N is a free, highly versatile 2D fighting <strong>game engine</strong>, but its true magic lies in its community-driven content: the <strong>Mugen Chars</strong>. These custom fighters are the lifeblood of the engine, offering near-limitless roster possibilities.</p>
+<p>Whether you're new to M.U.G.E.N, looking to expand your collection, or curious about how these characters tick, this guide is your ultimate resource. We'll cover everything from understanding their structure and finding safe downloads to installation, testing, and even peeking into the world of creation. We'll also touch upon <strong>IKEMEN GO</strong>, a modern, open-source engine built on M.U.G.E.N's foundations. Let's dive into the infinite arena!</p>
+<div class="download-buttons"><a href="#finding-downloading" class="su-button" target="_blank" rel="noopener"><span><svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> Download Mugen Chars</span></a></div>
+
+<img src="/wp-content/uploads/2025/05/mugen-chars.webp" alt="mugen chars" width="700" height="500" class="aligncenter size-full wp-image-2523" / loading="lazy" decoding="async">
+
+<hr class="su-divider" />
+
+<h2>What Are M.U.G.E.N Characters?</h2>
+<div class="features-section">
+    <div class="note-item">
+        <div class="note-icon">ℹ️</div>
+        <div>
+            <h3>Definition: The Building Blocks of Infinite Fights</h3>
+            <div class="text">
+                <p>At its core, M.U.G.E.N (often just "Mugen") is a free, customizable 2D fighting game engine developed by Elecbyte. A <strong>Mugen Char</strong> (character) isn't just a model; it's a self-contained package of files created by users (authors). These files define everything about a fighter: their appearance (sprites), movements (animations), special moves, sounds, and decision-making logic (AI).</p>
+                <p>Because each character is modular, you can download fighters from virtually any source—other fighting games, anime, comics, movies, or entirely original concepts—and add them to your M.U.G.E.N installation. This allows you to create dream rosters and matchups limited only by the community's creativity and your hard drive space.</p>
+            </div>
+        </div>
+    </div>
+    <div class="note-item">
+        <div class="note-icon">⚙️</div>
+        <div>
+            <h3>How They Work in the Engine</h3>
+            <div class="text">
+                <p>When you select a <strong>Mugen Char</strong> in the game, the engine reads its dedicated folder and loads the specified files. The character then behaves exactly as defined by its creator's code. Ryu from Street Fighter and Goku from Dragon Ball can exist side-by-side, each running their own unique animations and logic.</p>
+                <p>Think of M.U.G.E.N characters as plug-ins. The M.U.G.E.N engine provides the core framework—handling physics, collision detection, basic game rules, and input processing. The character files provide the unique content—the specific moves, visuals, sounds, and AI that make that fighter distinct.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="su-divider" />
+
+<h2>Anatomy of a M.U.G.E.N Character File Structure</h2>
+<div class="text">
+    <p>Understanding how <strong>Mugen Chars</strong> are built requires looking inside their folders. Each character is composed of several key <strong>MUGEN character files</strong>, each with a specific role. If any piece is missing or faulty, the character might glitch or crash the game.</p>
+    <img src="/wp-content/uploads/2025/05/how-mugen-chars-are-built.webp" alt="how mugen chars are built" width="700" height="500" class="aligncenter size-full wp-image-2522" / loading="lazy" decoding="async">
+</div>
+
+<h3>Core File Types Explained</h3>
+<details class="su-spoiler">
+<summary class="su-spoiler-title">Core File Types in Detail</summary>
+<div class="su-spoiler-content">
+<div class="stats-table">
+    <table>
+        <thead>
+            <tr>
+                <th>Icon</th>
+                <th>File Type &amp; Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><div class="feature-icon">📄</div></td>
+                <td><strong>.def (Definition File)</strong></td>
+                <td>The central manifest. This text file tells M.U.G.E.N the character's name, author, and, crucially, where to find all the other required files (.sff, .air, .cns, etc.). It's the starting point for loading a character.</td>
+            </tr>
+            <tr>
+                <td><div class="feature-icon">🎨</div></td>
+                <td><strong>.sff (Sprite File)</strong></td>
+                <td>A binary archive containing <em>all</em> the character's visual assets – every frame of animation for standing, walking, attacking, getting hit, plus portraits used on select screens. Early versions (SFFv1) used 256-color palettes, while newer versions (SFFv2 for MUGEN 1.0, SFFv2.1 for 1.1) support embedded palettes and even high-color PNGs with transparency.</td>
+            </tr>
+            <tr>
+                <td><div class="feature-icon">🎬</div></td>
+                <td><strong>.air (Animation File)</strong></td>
+                <td>A text file that defines how the sprites in the .sff file are sequenced to create animations. It specifies the timing for each frame and, crucially, defines the collision boxes – blue "hurtboxes" (where the character can be hit) and red "hitboxes" (the damaging part of attacks).</td>
+            </tr>
+            <tr>
+                <td><div class="feature-icon">🔊</div></td>
+                <td><strong>.snd (Sound File)</strong></td>
+                <td>A binary file containing all the character's audio, usually in .wav format. Voice clips, punch sounds, special move effects – they're all packed in here.</td>
+            </tr>
+            <tr>
+                <td><div class="feature-icon">🎮</div></td>
+                <td><strong>.cmd (Command File)</strong></td>
+                <td>A text file defining the button and joystick inputs required to perform special moves (e.g., Down, Forward, Punch). It can also contain basic AI logic, telling the computer opponent when to attempt certain moves.</td>
+            </tr>
+            <tr>
+                <td><div class="feature-icon">🧠</div></td>
+                <td><strong>.cns (Constants &amp; States File)</strong></td>
+                <td>Often considered the character's "brain." This crucial text file (sometimes split into multiple files) defines the character's fundamental attributes (like health, speed, jump height – the "constants") and the detailed logic for every possible action (the "states"). It uses triggers (conditions) and controllers (actions) to dictate exactly what happens when a character stands, jumps, attacks, gets hit, etc.</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</details>
+
+<div class="features-section">
+    <div class="note-item">
+        <div class="note-icon">🔗</div>
+        <div>
+            <h3>How the Files Interact</h3>
+            <div class="text">
+                <p>These files work in concert. The <code>.def</code> file points the engine to the others. The <code>.sff</code> and <code>.air</code> provide the visuals and collision data. The <code>.snd</code> adds audio cues. The <code>.cmd</code> listens for player (or AI) inputs. When a recognized command triggers a move, the <code>.cns</code> file's state definitions execute the logic – playing animations, applying movement, creating hitboxes, dealing damage, playing sounds, and transitioning to the next appropriate state. A well-made character has all these components working harmoniously.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<hr class="su-divider" />
+
+<h2 id="finding-downloading">Finding &amp; Downloading M.U.G.E.N Characters Safely</h2>
+<div class="text">
+    <p>One of M.U.G.E.N's greatest strengths is the vast library of freely available characters. However, quality and safety vary wildly. Here's how to navigate the <strong>MUGEN character download</strong> scene.</p>
+</div>
+
+<h3>Top Websites &amp; Communities</h3>
+<div class="stats-table">
+    <table>
+        <thead>
+            <tr>
+                <th>Icon</th>
+                <th>Website/Community</th>
+                <th>Description</th>
+                <th>Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><div class="note-icon">🌐</div></td>
+                <td><strong>Mugen Fighters Guild (MFG)</strong></td>
+                <td>A long-standing forum known for quality discussion, help, and often direct releases from respected creators. Great for finding polished characters.</td>
+                <td><a href="https://mugenguild.com/forum/" target="_blank" rel="noopener nofollow">Visit Mugen Fighters Guild</a></td>
+            </tr>
+            <tr>
+                <td><div class="note-icon">👥</div></td>
+                <td><strong>Mugen Free For All (MFFA)</strong></td>
+                <td>Another active forum, particularly useful for its "Collections" section, which organizes characters by series (DBZ, Marvel, Street Fighter, etc.) with download links. Very beginner-friendly for Browse.</td>
+                <td><a href="https://mugenfreeforall.com/forum/" target="_blank" rel="noopener nofollow">Visit Mugen Free For All</a></td>
+            </tr>
+            <tr>
+                <td><div class="note-icon">📦</div></td>
+                <td><strong>The Mugen Archive (MA)</strong></td>
+                <td>A massive repository with thousands of characters. Offers unparalleled selection but requires registration, has download limits for free users, and can be heavy on ads. <em>Exercise caution with ad links.</em></td>
+                <td><a href="https://mugenarchive.com/" target="_blank" rel="noopener nofollow">Visit Mugen Archive</a> (Consider using an ad blocker)</td>
+            </tr>
+            <tr>
+                <td><div class="note-icon">👤</div></td>
+                <td><strong>Creator Websites / Discord Servers</strong></td>
+                <td>Many top authors host their work on personal sites, blogs (Google Sites, etc.), or dedicated Discord channels. Finding these often requires searching forums like MFG for announcements.</td>
+                <td>Varies</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="features-section">
+    <div class="note-item">
+        <div class="note-icon">🔍</div>
+        <div>
+            <h3>Searching by Franchise or Style</h3>
+            <div class="text">
+                <p>Looking for specific types?</p>
+                <ul>
+                    <li>Use MFFA's Collection threads.</li>
+                    <li>Search for common style keywords: "CvS style" (Capcom vs SNK), "MvC style" (Marvel vs Capcom), "PotS style" (popular balanced custom style), "KOF style" (King of Fighters), "Anime", "JUS style" (chibi anime), "Original".</li>
+                    <li>Look for compilations or full game projects (e.g., Hyper DBZ) which often release characters individually.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="note-item">
+        <div class="note-icon">🛡️</div>
+        <div>
+            <h3>Safety Tips &amp; Quality Evaluation</h3>
+            <div class="text">
+                <p>Not all <strong>Mugen Chars</strong> are created equal. Protect yourself and find the <strong>best MUGEN characters</strong> for your roster:</p>
+                <ul>
+                    <li><strong>Prioritize Source:</strong> Download from the sites above or directly from known authors. Be wary of random links.</li>
+                    <li><strong>Scan Downloads:</strong> Always scan downloaded .zip/.rar files with antivirus software. Never run unexpected .exe files found inside character folders.</li>
+                    <li><strong>Check Reputation:</strong> Look up the author's name on MFG or MFFA. Creators like PotS, the late Reu, Warusaki3, Jmorphman, and others have reputations for quality. Avoid characters labeled "edit of an edit" if stability is key.</li>
+                    <li><strong>Read Comments:</strong> Check download pages or forum threads for user feedback on bugs or quality.</li>
+                    <li><strong>Evaluate In-Game:</strong> Test characters. Do they have complete animations? Are controls responsive? Is damage reasonable? Do hitboxes seem fair (use Ctrl+C)? Run in Debug Mode (Ctrl+D) – lots of red error messages indicate sloppy coding.</li>
+                    <li><strong>Verify Compatibility:</strong> Check the readme or .def file (<code>mugenversion</code> tag) for <strong>MUGEN character compatibility</strong>. WinMUGEN chars might glitch in 1.0/1.1/IKEMEN. 1.1 chars might crash 1.0 if they use new features.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="highlight-box">
+    <div class="note-item">
+        <div class="note-icon">💬</div>
+        <div>
+            <h3>Tweetable Quote</h3>
+            <div class="text">
+                <blockquote><p>"Finding great #MugenChars is a treasure hunt! Prioritize reputable sites like MFG &amp; MFFA, scan downloads, check author rep, and test in debug mode (Ctrl+D) for quality. #MUGEN"</p></blockquote>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<hr class="su-divider" />
+
+<h2>Installing &amp; Setting Up Your Fighters</h2>
+<div class="text"><p>Got some characters downloaded? Adding them to your game is usually straightforward. Here’s <strong>how to add MUGEN characters</strong>:</p></div>
+
+<h3>Step-by-Step Installation (MUGEN &amp; IKEMEN GO)</h3>
+<div class="instruction-container">
+    <div class="instruction-step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+            <h3>Locate Folders</h3>
+            <div class="text">Find your M.U.G.E.N installation. You need the <code>chars/</code> subfolder (where character folders go) and the <code>data/select.def</code> file (the roster list). <em>Note: Some screenpacks move <code>select.def</code> inside a subfolder within <code>data/</code>.</em></div>
+        </div>
+    </div>
+    <div class="instruction-step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+            <h3>Extract Character</h3>
+            <div class="text">Unzip the downloaded character archive. You should have a folder named after the character (e.g., <code>GokuZ2</code>). <strong>Crucially, this folder name MUST exactly match the <code>.def</code> file name inside it</strong> (e.g., <code>GokuZ2.def</code>). If extraction created an extra layer, move the correct folder.</div>
+        </div>
+    </div>
+    <div class="instruction-step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+            <h3>Copy to <code>chars/</code></h3>
+            <div class="text">Move or copy the character's folder into your <code>chars/</code> directory.</div>
+        </div>
+    </div>
+    <div class="instruction-step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+            <h3>Edit <code>select.def</code></h3>
+            <div class="text">Open <code>data/select.def</code> with a simple text editor (like Notepad).</div>
+        </div>
+    </div>
+    <div class="instruction-step">
+        <div class="step-number">5</div>
+        <div class="step-content">
+            <h3>Add Character Name</h3>
+            <div class="text">Scroll down to the section labeled <code>[Characters]</code>. On a new, empty line, type the exact name of the folder you just copied into <code>chars/</code>. For example:
+                <pre><code>[Characters]
+kfm ; Default Kung Fu Man
+GokuZ2 ; Added Goku character
+Ryu_CvS ; Added Ryu character
+</code></pre>
+                <em>(Lines starting with ';' are comments and ignored)</em>
+            </div>
+        </div>
+    </div>
+    <div class="instruction-step">
+        <div class="step-number">6</div>
+        <div class="step-content">
+            <h3>Save &amp; Test</h3>
+            <div class="text">Save the <code>select.def</code> file. Launch M.U.G.E.N. Your new character should appear on the selection screen!</div>
+        </div>
+    </div>
+</div>
+<div class="text"><p>This process is virtually identical for the <strong>IKEMEN GO</strong> engine, which maintains compatibility with M.U.G.E.N's structure.</p></div>
+
+<div class="features-section">
+    <div class="note-item">
+        <div class="note-icon">🔧</div>
+        <div>
+            <h3>Configuring Select Screen &amp; Troubleshooting</h3>
+            <div class="text">
+                <ul>
+                    <li><strong>Portraits:</strong> Characters usually include portraits (sprite 9000,0 small; 9000,1 large). If they don't show up, the screenpack might expect different sizes/indices, or the character is missing them.</li>
+                    <li><strong>More Slots:</strong> If you add too many characters for your screen, you need to edit your screenpack's <code>system.def</code> file (adjusting <code>rows</code>, <code>columns</code>, <code>cell.size</code>, etc.) – this is more advanced screenpack editing.</li>
+                    <li><strong>Common Issues:</strong>
+                        <ul>
+                            <li><em>Character not showing:</em> Check for typos in <code>select.def</code>. Ensure the folder name matches the <code>.def</code> file exactly. Check the line isn't commented out (<code>;</code>).</li>
+                            <li><em>Crash on select/load:</em> Usually a version incompatibility (check <code>mugenversion</code> in .def), missing files (like <code>.sff</code> or <code>.cns</code>), or a critical bug in the character's code.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="su-divider" />
+
+<h2>Gameplay, Testing &amp; Basic Modifications</h2>
+<div class="text"><p>With characters installed, it's time to play and potentially fine-tune your roster.</p></div>
+
+<div class="game-features-grid">
+    <div class="feature-card">
+        <div class="feature-icon">🕹️</div>
+        <h3>Game Modes &amp; Testing AI</h3>
+        <div class="text">
+            <p>Explore M.U.G.E.N's modes:</p>
+            <ul>
+                <li><strong>VS Mode:</strong> Standard 1v1 play vs Human or CPU.</li>
+                <li><strong>Arcade Mode:</strong> Single-player ladder against CPU opponents.</li>
+                <li><li><strong>Team Modes:</strong> Simul (multiple fighters on screen at once) or Turns (King of Fighters style).</li>
+                <li><strong>Watch Mode:</strong> AI vs AI battles – perfect for testing <strong>MUGEN AI characters</strong> and seeing how different fighters match up without player input. Popularized by streams like SaltyBet.</li>
+            </ul>
+            <p>When testing AI, remember that many characters scale their difficulty based on the game's options menu setting (Easy 1 - Hard 8) via the <code>AILevel</code> trigger in their code. Test on different difficulties!</p>
+        </div>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">🛠️</div>
+        <h3>Debug Tools &amp; Simple CNS Tweaks</h3>
+        <div class="text">
+            <p>M.U.G.E.N includes powerful testing tools:</p>
+            <ul>
+                <li><strong>Debug Mode (Ctrl+D):</strong> Overlays technical info (state numbers, variables) and logs errors. Essential for spotting problems.</li>
+                <li><strong>Collision Boxes (Ctrl+C):</strong> Toggles visibility of hitboxes (red) and hurtboxes (blue). Crucial for checking attack range, priority, and fairness.</li>
+            </ul>
+            <p>Want to make minor balance adjustments? You can carefully edit a character's <strong>.cns</strong> file (always back it up first!):</p>
+            <ul>
+                <li><strong>Adjust Health/Damage/Defense:</strong> Find the <code>[Data]</code> section and change <code>life</code>, <code>attack</code>, or <code>defence</code> values.</li>
+                <li><strong>Tweak Move Damage:</strong> Find the <code>HitDef</code> controller within a specific attack's state definition. Modify the <code>damage = X, Y</code> value (X is damage on hit, Y on block).</li>
+            </ul>
+            <p>These are basic tweaks; deeper changes require understanding M.U.G.E.N's coding language.</p>
+        </div>
+    </div>
+</div>
+
+<hr class="su-divider" />
+
+<h2>Character Creation, Community &amp; Advanced Concepts</h2>
+<div class="text"><p>For the truly dedicated, M.U.G.E.N offers the ability to create characters from scratch or delve into community nuances.</p></div>
+
+<div class="game-features-grid">
+    <div class="feature-card">
+        <div class="feature-icon">✏️</div>
+        <h3>Character Creation Basics &amp; Tools</h3>
+        <div class="text">
+            <p><strong>MUGEN character creation</strong> is a significant undertaking involving:</p>
+            <ul>
+                <li><strong>Spriting:</strong> Creating or editing <strong>pixel art</strong> for every animation frame. Requires image editors like GIMP, Photoshop, or Aseprite.</li>
+                <li><strong>Coding:</strong> Writing the logic in CNS/CMD files.</li>
+                <li><strong>Essential Tool:</strong> <strong>Fighter Factory</strong> (various versions like Studio, 3, Classic) is the go-to all-in-one tool for managing sprites, sounds, animations, palettes, and code.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">📜</div>
+        <h3>Open vs Closed Source &amp; Community Norms</h3>
+        <div class="text">
+            <p>In the M.U.G.E.N world:</p>
+            <ul>
+                <li><strong>"Open Source" (Community Term):</strong> The creator allows others to freely use/edit their character's code or assets (usually with credit). This fosters collaboration. PotS's characters are a prime example.</li>
+                <li><strong>"Closed Source" (Community Term):</strong> The creator requests that their work not be edited or assets reused without permission. Respecting these wishes is vital for community etiquette, even if files are technically accessible.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">🌟</div>
+        <h3>Understanding Styles, "Cheap" Chars &amp; Icons</h3>
+        <div class="text">
+            <ul>
+                <li><strong>Styles:</strong> Characters often emulate gameplay from specific series (CvS, MvC, KOF, PotS custom style). Mixing styles can lead to balance issues but allows dream matches.</li>
+                <li><strong>"Cheap" Characters:</strong> Intentionally overpowered fighters, often exploiting bugs or having unfair mechanics. Popular in AI tournaments but unsuitable for balanced play. Examples include Rare Akuma, God Orochi edits, and joke characters like Omega Tiger Woods.</li>
+                <li><strong>Icons:</strong> The community reveres certain creators (Reu, PotS, Warusaki3) and characters (the default Kung Fu Man, Reu's Evil Ryu/Ken, PotS's Rare Akuma) that have significantly shaped the scene.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="highlight-box">
+    <div class="note-item">
+        <div class="note-icon">💬</div>
+        <div>
+            <h3>Tweetable Quote</h3>
+            <div class="text">
+                <blockquote><p>"M.U.G.E.N's depth is amazing! From 'PotS style' balance to hilarious 'cheap' chars like Rare Akuma seen on SaltyBet, the community offers endless variety. #Mugen #MugenChars #FightingGames"</p></blockquote>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="su-divider" />
+
+<h2>Frequently Asked Questions</h2>
+<details class="su-spoiler">
+<summary class="su-spoiler-title">Read FAQs</summary>
+<div class="su-spoiler-content">
+<div class="features-section">
+    <div class="note-item">
+        <div class="note-icon">❓</div>
+        <div>
+            <h3>Q1: What files make up a Mugen character?</h3>
+            <div class="text">
+                <p>A Mugen character typically consists of a <code>.def</code> (definition), <code>.sff</code> (sprites), <code>.air</code> (animations), <code>.snd</code> (sounds), <code>.cmd</code> (commands), and <code>.cns</code> (states/logic) file, all within a dedicated folder.</p>
+            </div>
+        </div>
+    </div>
+    <div class="note-item">
+        <div class="note-icon">❓</div>
+        <div>
+            <h3>Q2: Where can I safely download Mugen chars?</h3>
+            <div class="text">
+                <p>Reputable community forums like Mugen Fighters Guild (MFG) and Mugen Free For All (MFFA), or directly from known creators' websites/Discords are generally the safest sources. Large archives like Mugen Archive offer quantity but require more caution regarding ads and potentially unvetted uploads. Always scan downloads.</p>
+            </div>
+        </div>
+    </div>
+    <div class="note-item">
+        <div class="note-icon">❓</div>
+        <div>
+            <h3>Q3: How do I add characters to M.U.G.E.N?</h3>
+            <div class="text">
+                <p>Place the character's correctly named folder into the <code>chars/</code> directory of your MUGEN installation. Then, open <code>data/select.def</code> with a text editor and add the character's folder name on a new line under the <code>[Characters]</code> section.</p>
+            </div>
+        </div>
+    </div>
+    <div class="note-item">
+        <div class="note-icon">❓</div>
+        <div>
+            <h3>Q4: Are Mugen chars legal?</h3>
+            <div class="text">
+                <p>M.U.G.E.N itself is freeware. However, many characters use copyrighted sprites and sounds ripped from commercial games without permission. Sharing or downloading such characters exists in a legal gray area. Original characters or those using freely licensed assets are generally fine. Use community content responsibly.</p>
+            </div>
+        </div>
+    </div>
+    <div class="note-item">
+        <div class="note-icon">❓</div>
+        <div>
+            <h3>Q5: What's the difference between M.U.G.E.N 1.0, 1.1, and IKEMEN GO?</h3>
+            <div class="text">
+                <p>MUGEN 1.0 was a major update adding HD support and fixing bugs. MUGEN 1.1 (beta) added features like stage zoom and better sprite support. IKEMEN GO is a modern, open-source engine compatible with MUGEN 1.0/1.1 characters but adds significant new features like built-in netplay, Lua scripting, and removes engine limits.</p>
+            </div>
+        </div>
+    </div>
+    <div class="note-item">
+        <div class="note-icon">❓</div>
+        <div>
+            <h3>Q6: Can I edit Mugen characters?</h3>
+            <div class="text">
+                <p>Yes, technically the core files (.cns, .cmd, .air, .def) are text-based and editable. Tools like Fighter Factory make asset editing (.sff, .snd) possible too. However, respect creator permissions ("closed source" characters) if you plan to share edits. Personal tweaks for balance are generally accepted.</p>
+            </div>
+        </div>
+    </div>
+    <div class="note-item">
+        <div class="note-icon">❓</div>
+        <div>
+            <h3>Q7: What are "cheap" MUGEN characters?</h3>
+            <div class="text">
+                <p>These are characters intentionally designed to be extremely overpowered, often using unfair tactics or engine exploits. They are generally not used for standard versus play but are popular in AI vs AI battles and streams like SaltyBet.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</details>
+
+<hr class="su-divider" />
+
+<h2>Your Infinite Fight Awaits!</h2>
+<div class="text">
+    <p>The world of <strong>Mugen Chars</strong> is a testament to the creativity and passion of the fighting game community. It's a sandbox where imagination truly is the only limit, allowing for endless customization and dream matchups. From downloading your first fighter to potentially creating your own, M.U.G.E.N offers a unique and rewarding experience.</p>
+    <p>Explore the communities, download safely, test thoroughly, and most importantly, have fun building your ultimate fighting game roster!</p>
+</div>`;
+---
+
+<MainLayout title={title} description={description} lang="en">
+<Fragment set:html={content} />
+</MainLayout>
