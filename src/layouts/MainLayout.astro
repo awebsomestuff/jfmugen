@@ -79,6 +79,8 @@ const navPT = [
 let nav = navEN;
 if (currentPath.startsWith('/es/')) nav = navES;
 else if (currentPath.startsWith('/pt/')) nav = navPT;
+
+const isHome = currentPath === '/' || currentPath === '';
 ---
 
 <!DOCTYPE html>
@@ -91,6 +93,9 @@ else if (currentPath.startsWith('/pt/')) nav = navPT;
   {description && <meta name="description" content={description} />}
   <link rel="canonical" href={autoCanonicalUrl} />
   <link rel="icon" type="image/webp" href="/wp-content/uploads/2023/09/cropped-jump-force-icon-Mugen-32x32.webp" />
+  <!-- Preconnect para Google AdSense -->
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />
+  <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossorigin />
 </head>
 <body>
   <header class="site-header">
@@ -120,6 +125,18 @@ else if (currentPath.startsWith('/pt/')) nav = navPT;
 
   <main class="site-content">
     <div class="content-wrapper">
+      {!isHome && (
+        <div class="ad-afterintro-container">
+          <div class="ad-afterintro-inner">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9609544329602409"
+                 data-ad-slot="5762720577"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+          </div>
+        </div>
+      )}
       <slot />
     </div>
   </main>
@@ -144,6 +161,62 @@ else if (currentPath.startsWith('/pt/')) nav = navPT;
   <style is:global>
     /* Reset */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ============================================
+       GOOGLE ADSENSE - Contenedores
+       - Altura fija: 300px (evita CLS)
+       - Anchura responsive con max-width: 1300px
+       ============================================ */
+
+    .ad-afterintro-container {
+      width: 100%;
+      max-width: 1300px;
+      height: 300px;
+      min-height: 300px;
+      max-height: 300px;
+      margin: 20px auto;
+      background-color: #f9f9f9;
+      overflow: hidden;
+    }
+
+    .ad-afterintro-inner {
+      width: 100%;
+      height: 280px;
+      max-height: 280px;
+      overflow: hidden;
+    }
+
+    .ad-afterintro-inner .adsbygoogle {
+      display: block;
+      width: 100%;
+      max-height: 280px;
+    }
+
+    .ad-afterintro-inner ins.adsbygoogle[data-ad-status="filled"] {
+      display: flex !important;
+      justify-content: center;
+    }
+
+    .ad-incontent-container {
+      width: 100%;
+      max-width: 1300px;
+      height: 300px;
+      min-height: 300px;
+      max-height: 300px;
+      margin: 20px auto;
+      overflow: hidden;
+    }
+
+    .ad-incontent-container .adsbygoogle {
+      display: block;
+      width: 100%;
+      max-height: 280px;
+    }
+
+    .ad-incontent-container ins.adsbygoogle[data-ad-status="filled"] {
+      display: flex !important;
+      justify-content: center;
+    }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -911,6 +984,30 @@ else if (currentPath.startsWith('/pt/')) nav = navPT;
         this.classList.add('activated');
       });
     });
+  </script>
+
+  <!-- AdSense: Carga diferida para mejorar rendimiento -->
+  <script is:inline>
+    function loadAdSense() {
+      var script = document.createElement('script');
+      script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9609544329602409';
+      script.async = true;
+      script.crossOrigin = 'anonymous';
+      script.onload = function() {
+        try {
+          var ads = document.querySelectorAll('.adsbygoogle');
+          for (var i = 0; i < ads.length; i++) {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          }
+        } catch (e) {}
+      };
+      document.head.appendChild(script);
+    }
+    if (document.readyState === 'complete') {
+      loadAdSense();
+    } else {
+      window.addEventListener('load', loadAdSense);
+    }
   </script>
 </body>
 </html>
