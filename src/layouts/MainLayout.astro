@@ -15,21 +15,13 @@ const autoCanonicalUrl = canonicalUrl || `${siteUrl}${currentPath}`;
 
 // Navigation menus per language
 const navEN = [
-  { label: 'Home', href: '/' },
-  { label: 'Mugen 1.1', href: '/mugen-1-1/' },
-  { label: 'Chars \uD83D\uDC32', href: '/chars/' },
-  { label: 'One Piece \u2693', href: '/one-piece/' },
-  { label: 'Dragon Ball \uD83D\uDD35', href: '/dragon-ball/' },
-  { label: 'Naruto \uD83C\uDF43', href: '/naruto/' },
-  { label: 'Anime \u2728', href: '/anime/' },
-  { label: 'Mortal Kombat \uD83D\uDC80', href: '/mortal-kombat/' },
+  { label: 'Mugen 1.1', href: '/1-1/' },
+  { label: 'One Piece', href: '/one-piece/' },
+  { label: 'Dragon Ball', href: '/dragon-ball/' },
+  { label: 'Naruto', href: '/naruto/' },
+  { label: 'Anime', href: '/anime/' },
+  { label: 'Mortal Kombat', href: '/mortal-kombat/' },
   { label: 'IKEMEN', href: '/ikemen-go/' },
-  { label: 'APKs \u25BC', href: '#', children: [
-    { label: 'APK', href: '/apk/' },
-    { label: 'Lite APK', href: '/lite-apk/' },
-    { label: 'BVN Lite APK', href: '/bvn-lite-apk/' },
-    { label: 'Zinnat APK', href: '/zinnat-apk/' },
-  ]},
 ];
 
 const navES = [
@@ -47,11 +39,6 @@ const navES = [
   { label: 'v11', href: '/es/v11-descargar/' },
   { label: 'v12', href: '/es/v12-descargar/' },
   { label: 'v13', href: '/es/v13-descargar/' },
-  { label: 'APKs', href: '#', children: [
-    { label: 'APK', href: '/es/apk-descargar/' },
-    { label: 'Lite APK', href: '/es/lite-apk-descargar/' },
-    { label: 'BVN Lite', href: '/es/bvn-lite-apk-descargar/' },
-  ]},
 ];
 
 const navPT = [
@@ -69,11 +56,6 @@ const navPT = [
   { label: 'v11', href: '/pt/v11-baixar/' },
   { label: 'v12', href: '/pt/v12-baixar/' },
   { label: 'v13', href: '/pt/v13-baixar/' },
-  { label: 'APKs', href: '#', children: [
-    { label: 'APK', href: '/pt/apk-baixar/' },
-    { label: 'Lite APK', href: '/pt/lite-apk-baixar/' },
-    { label: 'BVN Lite', href: '/pt/bvn-lite-apk-baixar/' },
-  ]},
 ];
 
 let nav = navEN;
@@ -98,12 +80,10 @@ else if (currentPath.startsWith('/pt/')) nav = navPT;
 </head>
 <body>
   <header class="site-header">
-    <div class="header-inner">
-      <a href="/" class="site-logo">
-        <img src="/wp-content/uploads/2025/01/cropped-Untitled-image-2.webp" alt="JFMugen" width="200" height="40" fetchpriority="high" />
-      </a>
-    </div>
     <nav class="main-nav">
+      <a href="/" class="site-logo">
+        <img src="/wp-content/uploads/2025/01/cropped-Untitled-image-2.webp" alt="JFMugen" fetchpriority="high" />
+      </a>
       <button class="nav-toggle" aria-label="Menu">&#9776;</button>
       <ul class="nav-list">
         {nav.map(item => (
@@ -139,19 +119,15 @@ else if (currentPath.startsWith('/pt/')) nav = navPT;
   </main>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-lang">
-        <a href="/">&#127482;&#127480; English</a>
-        <a href="/es/descargar/">&#127474;&#127485; Espanol</a>
-        <a href="/pt/baixar/">&#127463;&#127479; Portugues</a>
-      </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 jfmugen.com</p>
       <div class="footer-links">
+        <a href="/">&#127482;&#127480; English</a>
+        <a href="/es/descargar/">&#127474;&#127485; Español</a>
+        <a href="/pt/baixar/">&#127463;&#127479; Português</a>
         <a href="/privacy-policy/">Privacy Policy</a>
         <a href="/terms-of-service/">Terms of Service</a>
       </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 jfmugen.com</p>
     </div>
   </footer>
 
@@ -228,20 +204,25 @@ else if (currentPath.startsWith('/pt/')) nav = navPT;
     /* Header */
     .site-header {
       background: #2d2d2d;
-      text-align: center;
-      padding: 15px 0 0;
-    }
-    .header-inner {
-      padding: 0 20px 10px;
-    }
-    .site-logo img {
-      height: 50px;
-      width: 200px;
-      object-fit: contain;
     }
     .main-nav {
-      background: #3d3d3d;
+      max-width: 1200px;
+      margin: 0 auto;
       padding: 0;
+      display: flex;
+      height: 50px;
+    }
+    .site-logo {
+      flex-shrink: 0;
+      margin-right: auto;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      line-height: 0;
+    }
+    .site-logo img {
+      height: 38px !important;
+      width: auto;
     }
     .nav-toggle {
       display: none;
@@ -249,20 +230,22 @@ else if (currentPath.startsWith('/pt/')) nav = navPT;
       border: none;
       color: white;
       font-size: 24px;
-      padding: 10px 20px;
       cursor: pointer;
     }
     .nav-list {
       list-style: none;
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0;
+      margin: 0;
+      padding: 0;
     }
-    .nav-list > li { position: relative; }
+    .nav-list > li {
+      position: relative;
+    }
     .nav-list > li > a {
       display: block;
-      padding: 12px 16px;
+      padding: 0 16px;
+      height: 50px;
+      line-height: 50px;
       color: #e0e0e0;
       font-size: 14px;
       font-weight: 500;
@@ -473,26 +456,27 @@ else if (currentPath.startsWith('/pt/')) nav = navPT;
     .su-column-1-5 { flex: 0 0 calc(20% - 16px); }
     .su-column-1-1 { flex: 0 0 100%; }
 
-    /* Game cards with overlay title (homepage collections) */
+    /* Game cards with title below image */
     .su-column-1-3,
     .su-column-1-4,
     .su-column-1-5 {
       position: relative;
-    }
-    .su-column-1-3 > a,
-    .su-column-1-4 > a,
-    .su-column-1-5 > a {
-      display: block;
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .su-column-1-3 > a:hover,
-    .su-column-1-4 > a:hover,
-    .su-column-1-5 > a:hover {
+    .su-column-1-3:hover,
+    .su-column-1-4:hover,
+    .su-column-1-5:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+    .su-column-1-3 > a,
+    .su-column-1-4 > a,
+    .su-column-1-5 > a {
+      display: block;
+      position: relative;
     }
     .su-column-1-3 > a img,
     .su-column-1-4 > a img,
@@ -504,19 +488,22 @@ else if (currentPath.startsWith('/pt/')) nav = navPT;
       object-fit: cover;
     }
     .game-title {
-      background: rgba(0,0,0,0.75);
-      padding: 10px 8px;
+      background: #000;
+      padding: 6px 8px;
       text-align: center;
-      font-size: 13px;
+      font-size: 12px;
+      line-height: 1.3;
       color: #ffffff;
       font-weight: 500;
-      width: 100%;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      z-index: 1;
-      backdrop-filter: blur(4px);
-      border-radius: 0 0 10px 10px;
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #mugen-games {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
 
     /* Menu column (legacy support) */
@@ -541,12 +528,14 @@ else if (currentPath.startsWith('/pt/')) nav = navPT;
       display: block;
       position: relative;
       width: 100%;
-      height: 100%;
       text-decoration: none;
       color: inherit;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       border-radius: 12px;
       overflow: hidden;
+    }
+    .game-container .game-link {
+      height: 100%;
     }
     .game-link:hover {
       transform: translateY(-5px);
@@ -603,6 +592,35 @@ else if (currentPath.startsWith('/pt/')) nav = navPT;
       white-space: nowrap;
     }
 
+    /* Categories gallery overrides */
+    .categories-gallery .image-wrapper {
+      border-radius: 12px;
+      aspect-ratio: 2.98 / 1;
+      height: auto;
+    }
+    .categories-gallery .game-link {
+      border-radius: 12px;
+    }
+    .categories-gallery .game-link:hover {
+      transform: none;
+      box-shadow: none;
+    }
+    .categories-gallery .game-link:hover .game-image {
+      transform: scale(1.08);
+    }
+    .categories-gallery .game-link:hover .game-button {
+      transform: scale(1.1);
+    }
+    .categories-gallery .button-wrapper {
+      opacity: 1;
+    }
+    .categories-gallery .image-wrapper::after {
+      opacity: 1;
+    }
+    .categories-gallery .game-button {
+      transition: transform 0.3s ease;
+    }
+
     /* Spoiler / accordion */
     .su-spoiler {
       background-color: #f7f7f7;
@@ -632,27 +650,37 @@ else if (currentPath.startsWith('/pt/')) nav = navPT;
       margin: 25px 0;
     }
 
-    /* Hidden cards (toggle) */
-    .hidden-cards {
-      display: none;
+    /* Jump Force collection */
+    #jumpforce-collection {
+      background: linear-gradient(135deg, #fff4e5 0%, #fff9f0 70%, #fff4e5 100%);
+      border-radius: 12px;
+      padding: 20px 25px;
+      margin: 0 0 20px;
+      border: 1px solid rgba(255,102,0,0.1);
     }
-
-    /* Load more button */
-    .load-more-container {
-      text-align: center;
-      margin: 30px auto;
+    .jf-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin: 0;
     }
-    .load-more-container .su-button {
-      padding: 12px 35px !important;
-      background: #9a3c00 !important;
-      border: none !important;
-      border-radius: 6px !important;
-      cursor: pointer;
-      color: white !important;
+    .jf-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: linear-gradient(45deg, #FF6B00, #FF8F1F);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 2px 8px rgba(255,107,0,0.3);
     }
-    .load-more-container .su-button::after { display: none !important; }
-    .load-more-container .su-button span { color: white !important; }
-    .load-more-container .su-button:hover { background: #222 !important; }
+    .jf-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255,107,0,0.4);
+    }
 
     /* Important notes */
     .important-notes {
@@ -703,7 +731,7 @@ else if (currentPath.startsWith('/pt/')) nav = navPT;
       align-items: center;
       justify-content: center;
       font-size: 2em;
-      margin-bottom: 20px;
+      margin: 0 auto 20px;
       color: #B04500;
     }
 
@@ -756,6 +784,10 @@ else if (currentPath.startsWith('/pt/')) nav = navPT;
       font-weight: bold;
       margin-right: 20px;
       flex-shrink: 0;
+    }
+    .step-content h4 {
+      margin: 0 0 8px 0;
+      text-align: left;
     }
 
     /* YouTube embed with lazy load facade */
@@ -835,53 +867,49 @@ else if (currentPath.startsWith('/pt/')) nav = navPT;
 
     /* Footer */
     .site-footer {
-      background: #2d2d2d;
+      background: #1a1a1a;
       color: #ccc;
-      padding: 40px 20px 0;
     }
-    .footer-inner {
+    .footer-bottom {
       max-width: 1200px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
+      padding: 15px 20px;
+      font-size: 14px;
+    }
+    .footer-bottom p {
+      color: #FF6600;
+      margin: 0;
+    }
+    .footer-links {
+      display: flex;
+      gap: 15px;
       flex-wrap: wrap;
-      gap: 20px;
-      padding-bottom: 30px;
     }
-    .footer-lang a {
-      display: block;
-      color: #4da6ff;
-      margin-bottom: 8px;
-      font-size: 14px;
-    }
-    .footer-lang a:hover { color: #FF6600; }
     .footer-links a {
-      display: block;
-      color: #4da6ff;
-      margin-bottom: 8px;
-      font-size: 14px;
-    }
-    .footer-links a:hover { color: #FF6600; }
-    .footer-bottom {
-      background: #1a1a1a;
-      text-align: center;
-      padding: 15px;
       color: #FF6600;
       font-size: 14px;
+      text-decoration: none;
     }
+    .footer-links a:hover { color: #ff8533; }
 
     /* Responsive */
     @media (max-width: 768px) {
-      .nav-toggle { display: block; width: 100%; text-align: left; }
-      .nav-list { display: none; flex-direction: column; }
+      .main-nav { flex-wrap: wrap; }
+      .nav-toggle { display: block; order: 2; }
+      .site-logo { order: 1; }
+      .nav-list { display: none; flex-direction: column; width: 100%; order: 3; }
       .nav-list.active { display: flex; }
       .su-column-1-3, .su-column-1-2, .su-column-2-3 { flex: 0 0 100%; }
       .su-column-1-4, .su-column-1-5 { flex: 0 0 calc(50% - 10px); }
+      #mugen-games { grid-template-columns: repeat(2, 1fr); }
       .content-wrapper { padding: 20px 15px 40px; }
       .button-wrapper { opacity: 1; }
       .game-features-grid { grid-template-columns: 1fr; }
-      .footer-inner { flex-direction: column; }
+      .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+      .footer-links { justify-content: center; }
     }
 
     /* Paragraphs */
